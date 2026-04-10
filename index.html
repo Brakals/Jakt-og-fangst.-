@@ -27,6 +27,12 @@ button, select, input {
   padding: 10px;
   border-radius: 10px;
 }
+
+img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 5px;
+}
 </style>
 </head>
 
@@ -41,9 +47,16 @@ button, select, input {
 <button onclick="exportData()">💾 Backup</button>
 <input type="file" onchange="importData(event)"/>
 
+<hr>
+
+<h3>Legg til nytt dyr</h3>
+<input id="newAnimal" placeholder="F.eks Bjørn"/>
+<button onclick="addAnimal()">Legg til dyr</button>
+
 <div id="content"></div>
 
 <script src="app.js"></script>
+
 <script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js");
