@@ -1,1 +1,21 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="manifest" href="manifest.json">
+  <title>Jakt App</title>
+</head>
+<body>
+  <h1>Jakt App</h1>
 
+  <button onclick="show('jakt')">🦌 Jakt</button>
+  <button onclick="show('felle')">🪤 Fellefangst</button>
+  <button onclick="exportData()">💾 Backup</button>
+  <input type="file" onchange="importData(event)"/>
+
+  <div id="content"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
