@@ -8,22 +8,45 @@ function save() {
 }
 
 function show(type) {
-  let html = `<h2>${type}</h2>
-    <input id="input" placeholder="Skriv noe"/>
-    <button onclick="add('${type}')">Legg til</button>
-    <ul>`;
+  let html = `
+    <h2>${type.toUpperCase()}</h2>
 
-  data[type].forEach(item => {
-    html += `<li>${item}</li>`;
+    <input id="text" placeholder="Hva skjedde?"/>
+    <input id="place" placeholder="Sted"/>
+    <button onclick="add('${type}')">Legg til</button>
+  `;
+
+  data[type].forEach((item, i) => {
+    html += `
+      <div class="card">
+        <b>${item.text}</b><br>
+        <span class="small">${item.place} • ${item.date}</span><br>
+        <button onclick="remove('${type}', ${i})">❌</button>
+      </div>
+    `;
   });
 
-  html += "</ul>";
   document.getElementById("content").innerHTML = html;
 }
 
 function add(type) {
-  let val = document.getElementById("input").value;
-  data[type].push(val);
+  let text = document.getElementById("text").value;
+  let place = document.getElementById("place").value;
+
+  if (!text) return;
+
+  data[type].push({
+    text,
+    place,
+    date: new Date().toLocaleString()
+  });
+
+  save();
+  show(type);
+}
+
+function remove(type, index) {
+  data[type].splice(index, 1);
   save();
   show(type);
 }
@@ -39,10 +62,12 @@ function exportData() {
 function importData(event) {
   let file = event.target.files[0];
   let reader = new FileReader();
+
   reader.onload = function() {
     data = JSON.parse(reader.result);
     save();
     alert("Importert!");
   };
+
   reader.readAsText(file);
 }
