@@ -5,17 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="manifest" href="manifest.json">
   <title>Jakt App</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #111;
+      color: white;
+      text-align: center;
+    }
+    button {
+      margin: 5px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    input {
+      padding: 10px;
+      margin: 10px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Jakt App</h1>
 
-  <button onclick="show('jakt')">🦌 Jakt</button>
-  <button onclick="show('felle')">🪤 Fellefangst</button>
-  <button onclick="exportData()">💾 Backup</button>
-  <input type="file" onchange="importData(event)"/>
+<h1>Jakt & Fellefangst</h1>
 
-  <div id="content"></div>
+<button onclick="show('jakt')">🦌 Jakt</button>
+<button onclick="show('felle')">🪤 Fellefangst</button>
+<br><br>
+<button onclick="exportData()">💾 Backup</button>
+<input type="file" onchange="importData(event)"/>
+
+<div id="content"></div>
 
 <script src="app.js"></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+
 </body>
 </html>
