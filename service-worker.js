@@ -1,9 +1,19 @@
-{
-  "name": "Jakt App",
-  "short_name": "Jakt",
-  "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
-  "icons": []
-}
+const CACHE = "jakt-app-v2";
+
+self.addEventListener("install", e => {
+  e.waitUntil(
+    caches.open(CACHE).then(cache => {
+      return cache.addAll([
+        "./",
+        "./index.html",
+        "./app.js"
+      ]);
+    })
+  );
+});
+
+self.addEventListener("fetch", e => {
+  e.respondWith(
+    caches.match(e.request).then(res => res || fetch(e.request))
+  );
+});
