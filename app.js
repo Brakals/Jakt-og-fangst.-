@@ -11,16 +11,26 @@ function show(type) {
   let html = `
     <h2>${type.toUpperCase()}</h2>
 
+    <select id="animal">
+      <option>Elg</option>
+      <option>Hjort</option>
+      <option>Rådyr</option>
+      <option>Rev</option>
+      <option>Rype</option>
+    </select>
+
     <input id="text" placeholder="Hva skjedde?"/>
     <input id="place" placeholder="Sted"/>
+
     <button onclick="add('${type}')">Legg til</button>
   `;
 
   data[type].forEach((item, i) => {
     html += `
       <div class="card">
-        <b>${item.text}</b><br>
-        <span class="small">${item.place} • ${item.date}</span><br>
+        <b>${item.animal}</b><br>
+        ${item.text}<br>
+        <small>${item.place} • ${item.date}</small><br>
         <button onclick="remove('${type}', ${i})">❌</button>
       </div>
     `;
@@ -30,12 +40,14 @@ function show(type) {
 }
 
 function add(type) {
+  let animal = document.getElementById("animal").value;
   let text = document.getElementById("text").value;
   let place = document.getElementById("place").value;
 
   if (!text) return;
 
   data[type].push({
+    animal,
     text,
     place,
     date: new Date().toLocaleString()
