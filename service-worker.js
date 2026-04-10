@@ -1,4 +1,4 @@
-const CACHE = "jakt-app-v3";
+const CACHE = "jakt-app-v4";
 
 self.addEventListener("install", e => {
   e.waitUntil(
